@@ -22,13 +22,15 @@ public partial class Photographs : Window
 
     async void Query()
     {
-        foreach (var ph in await _client.QueryAsync<Photographer>("SELECT Photographer {full_name, name};"))
+        foreach (var ph in await _client.QueryAsync<Photographer>("SELECT Photographer {id, full_name};"))
         {
+
+            var count = await _client.QuerySingleAsync<int>($"SELECT count_p_by_author((select <uuid>'{ph.id}'));");
             ListBoxItem itm = new()
             {
-                Content = ph.full_name
+                Content = ph.full_name + " " + count
             };
-            list_of_photographs.Items.Insert(0, itm);
+            list_of_photographs.Items.Add(itm);
         }
 
     }

@@ -2,7 +2,7 @@ module default {
     abstract type Human {
         required property name -> str;
         property surname -> str;
-        property full_name := .name ++ ' ' ++ .surname; 
+        property full_name := .name ++ ' ' ++ .surname;
     }
 
     type Person extending Human {
@@ -11,6 +11,8 @@ module default {
 
     type Photographer extending Human{
         multi link camera -> Camera;
+        property nick -> str {constraint exclusive; };
+
     }
 
     type Camera {
@@ -38,4 +40,13 @@ module default {
         property date -> datetime;
     }
 
+    function count_p_by_author(author_id: uuid)-> int64
+        using(
+            SELECT count(
+            (
+            select Photo
+            filter .author.id = author_id
+            )
+            )
+        )
 }
