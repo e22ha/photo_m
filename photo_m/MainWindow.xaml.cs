@@ -12,8 +12,6 @@ namespace photo_m;
         public MainWindow()
         {
             InitializeComponent();
-            status.Content = "Hello\n";
-
         }
 
         private void Go(object sender, RoutedEventArgs e)
@@ -24,12 +22,33 @@ namespace photo_m;
         private async void Query()
         {
             status.FontSize = 18;
-            status.Content += await _client.QuerySingleAsync<string>("SELECT 1+1") + "\n";
+            status.Text += await _client.QuerySingleAsync<string>("SELECT 1+1") + "\n";
         }
 
         private void Cls(object sender, RoutedEventArgs e)
         {
             status.FontSize = 32;
-            status.Content = "Hello\n";
+            status.Text = "Hello\n";
+        }
+
+        private void GoTo(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void f_mode(object sender, RoutedEventArgs e)
+        {
+            Photographs p_win = new Photographs();
+            p_win.Show();
+        }
+
+        private void e_mode(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void p_mode(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
     }
