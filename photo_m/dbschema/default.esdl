@@ -26,7 +26,7 @@ module default {
     type Photo {
         required property name -> str;
         required property directory -> str;
-        required property full_path := .directory ++ ' ' ++ .name;
+        required property full_path := .directory ++ .name;
         required link author -> Photographer;
         multi link face -> Person;
         property rating -> Rate{

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,13 +12,30 @@ namespace photo_m;
 
 public partial class Photographs : Window
 {
-    private readonly EdgeDBClient _client = new();
     private String result;
+    public EdgeDBClient _client = new();
     public Photographs()
     {
         InitializeComponent();
         var i = 0;
-        Query();
+        //Query();
+        NormalQuery();
+
+    }
+
+
+
+    async void NormalQuery()
+    {
+        foreach (var ph in await _client.QueryAsync<Tuple<string, long>>(
+                     "SELECT (Photographer.full_name, (select count(Photographer.<author[is Photo])));"))
+        {
+            ListBoxItem itm = new()
+            {
+                Content = ph.Item1 + "------------" + ph.Item2
+            };
+            ListOfPhotographs.Items.Add(itm);
+        }
 
     }
 
@@ -30,8 +49,9 @@ public partial class Photographs : Window
             {
                 Content = ph.full_name + " " + count
             };
-            list_of_photographs.Items.Add(itm);
+            ListOfPhotographs.Items.Add(itm);
         }
 
     }
 }
+

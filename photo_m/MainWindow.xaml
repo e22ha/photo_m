@@ -18,33 +18,35 @@
             <ColumnDefinition Width="0.2*"></ColumnDefinition>
             <ColumnDefinition Width="0.7*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Menu Grid.ColumnSpan="4" HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
+        <Menu Grid.ColumnSpan="4" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
               VerticalContentAlignment="Center" VerticalAlignment="Center">
-            <MenuItem Click="f_mode" Header="Фотографы" HorizontalContentAlignment="Center" Width="70" Margin="50 0"/>
-            <MenuItem Click="e_mode" Header="События" HorizontalContentAlignment="Center" Width="70" Margin="50 0"/>
-            <MenuItem Click="p_mode" Header="Люди" HorizontalContentAlignment="Center" Width="70" Margin="50 0"/>
+            <MenuItem Click="f_mode" Header="Фотографы" HorizontalContentAlignment="Center" Width="70" Margin="50 0" />
+            <MenuItem Click="e_mode" Header="События" HorizontalContentAlignment="Center" Width="70" Margin="50 0" />
+            <MenuItem Click="p_mode" Header="Люди" HorizontalContentAlignment="Center" Width="70" Margin="50 0" />
         </Menu>
         <Button Grid.Row="1" Grid.Column="0"
-                Content="⇱" Click="GoTo" 
+                Content="⇱" Click="Back"
                 Margin="5"
-                FontFamily="Roboto"
-        />
-        <Border Grid.Row="1"  Grid.Column="1" BorderThickness="3" BorderBrush="Gray" CornerRadius="10" Margin="5">
-            <TextBox Name="status" Text="C:\Code\_catalog_py_sqlite\rgz_2.0\photo_m\test\" 
+                FontFamily="Roboto" />
+        <Border Grid.Row="1" Grid.Column="1" BorderThickness="3" BorderBrush="Gray" CornerRadius="10" Margin="5">
+            <TextBox Name="PathTextBox" Text="C:\Code\_catalog_py_sqlite\rgz_2.0\photo_m\test\"
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                      Margin="5"
                      Background="Transparent"
                      BorderThickness="0">
             </TextBox>
         </Border>
-        <Button Grid.Row="1"  Grid.Column="2"
-                Content="Go" Click="GoTo" 
+        <Button Grid.Row="1" Grid.Column="2"
+                Content="Go" Click="Find"
                 Margin="5"
-                FontFamily="Roboto"
-        />
-        <Rectangle  Grid.Row="2" Grid.ColumnSpan="3" Fill="Blue">
-           
-        </Rectangle>
+                FontFamily="Roboto" />
+        <ListBox Grid.Row="2" Grid.ColumnSpan="3"
+                  Name="list_of_files"
+                  SelectionChanged="List_of_files_OnSelectionChanged"
+                  Background="Silver">
+            <ListBoxItem Name="first_item" Content="1"></ListBoxItem>
+        </ListBox>
+        <Label  Name="Log" Content="Log" />
         <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"></RowDefinition>
@@ -58,38 +60,38 @@
                 <ColumnDefinition Width="0.4*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Grid.ColumnSpan="2" Source="/img/img_placeholder.png" Margin="15"></Image>
-            <Label Grid.Row="1" Grid.Column="0" 
-                   Content="Фотограф" 
-                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="Gold" Height="20"
-                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <Label Grid.Row="2" Grid.Column="0" 
-                   Content="Рейтинг" 
-                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="Gold" Height="20"
-                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <Label Grid.Row="3" Grid.Column="0" 
-                   Content="Событие" 
-                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="Gold" Height="20"
-                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <Label Grid.Row="4" Grid.Column="0" 
-                   Content="Лица" 
-                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="Gold" Height="20"
-                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <Button Grid.Row="5" Grid.Column="0" 
-                   Content="Отмена" 
-                   Height="20"
-                   Width="50"
-                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Button Grid.Row="5" Grid.Column="1" 
-                    Content="Ок" 
+            <Image Grid.ColumnSpan="2" Name="ImageV" Source="/Resource/img_placeholder.png" Margin="15"></Image>
+            <Label Grid.Row="1" Grid.Column="0"
+                   Content="Фотограф"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <TextBox Name="Author_box" Grid.Row="1" Grid.Column="1" Text="Gold" Height="20"
+                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <Label Grid.Row="2" Grid.Column="0"
+                   Content="Рейтинг"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <TextBox Name="Rate_box" Grid.Row="2" Grid.Column="1" Text="Gold" Height="20"
+                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <Label Grid.Row="3" Grid.Column="0"
+                   Content="Событие"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <TextBox  Name="Event_box" Grid.Row="3" Grid.Column="1" Text="Gold" Height="20"
+                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <Label Grid.Row="4" Grid.Column="0"
+                   Content="Лица"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <TextBox Name="Face_box" Grid.Row="4" Grid.Column="1" Text="Gold" Height="20"
+                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <Button Grid.Row="5" Grid.Column="0"
+                    Content="Отмена"
+                    Height="20"
+                    Width="50"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button Grid.Row="5" Grid.Column="1"
+                    Content="Ок"
                     Height="20"
                     Width="50"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                    HorizontalAlignment="Left"/>
+                    HorizontalAlignment="Left" />
         </Grid>
     </Grid>
 </Window>

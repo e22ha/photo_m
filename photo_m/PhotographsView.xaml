@@ -14,6 +14,6 @@
         <Label Name="Label"  Content="Фотографы" 
                FontFamily="Roboto"
                FontSize="28"/>
-        <ListBox Grid.Row="1" Name="list_of_photographs"/>
+        <ListBox Grid.Row="1" Name="ListOfPhotographs"/>
     </Grid>
 </Window>

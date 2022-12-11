@@ -11,4 +11,9 @@
       <PackageReference Include="EdgeDB.Net.Driver" Version="1.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="img\img_placeholder.png" />
+      <Resource Include="Resource\img_placeholder.png" />
+    </ItemGroup>
+
 </Project>
