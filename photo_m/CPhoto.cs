@@ -17,15 +17,9 @@ namespace photo_m
                 return this.full_path; // = full_path.Replace(@"\",@"/");
             }
         }
-        public enum Rating
-        {
-            None = 0,
-            Bad = 1,
-            NotBad = 2,
-            Normal = 3,
-            Super = 4,
-            Shdevr = 5
-        }
+
+        public int? Rating;
+      
 
         public Event event_;
 

@@ -83,11 +83,13 @@
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
             <Button Grid.Row="5" Grid.Column="0"
                     Content="Отмена"
+                    Click="Cancel_click"
                     Height="20"
                     Width="50"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Button Grid.Row="5" Grid.Column="1"
                     Content="Ок"
+                    Click="Ok_click"
                     Height="20"
                     Width="50"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"

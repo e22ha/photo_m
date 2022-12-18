@@ -5,31 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/photo_m/CPhoto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/photo_m/Resource/img_placeholder.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/photo_m/dbschema/migrations/00008.edgeql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/1/11/1234.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/1/11/5678.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/1/12/1357.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/1/12/9876.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/2/0009.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/2/4367.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/Human.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CHuman.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/CPhoto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CPhoto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/photo_m/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/MainWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/Photographer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CPhotographer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/Photographs.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/PhotographsView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/Photographs.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/PhotographsView.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/photo_m/dbschema/default.esdl" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/dbschema/default.esdl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/img/img_placeholder.png" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/Resource/folder_placeholder.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/photo_m.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/photo_m.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1/11/1234.img" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1/11/5678.img" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1/12/1357.img" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/1/12/9876.img" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/2/0009.img" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/2/4367.img" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +112,10 @@
       <workItem from="1670695948496" duration="247000" />
       <workItem from="1670696759490" duration="2375000" />
       <workItem from="1670737772173" duration="26590000" />
-      <workItem from="1670767740398" duration="5344000" />
+      <workItem from="1670767740398" duration="6000000" />
+      <workItem from="1671344046907" duration="663000" />
+      <workItem from="1671348584874" duration="899000" />
+      <workItem from="1671353689050" duration="3957000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1670657271068</created>
@@ -155,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670699145583</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="inprogress">
+      <created>1670773623758</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670773623758</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,7 +176,8 @@
     <MESSAGE value="init" />
     <MESSAGE value="add ui" />
     <MESSAGE value="add photograph list" />
-    <option name="LAST_COMMIT_MESSAGE" value="add photograph list" />
+    <MESSAGE value="inprogress" />
+    <option name="LAST_COMMIT_MESSAGE" value="inprogress" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

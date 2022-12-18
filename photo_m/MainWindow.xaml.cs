@@ -95,25 +95,65 @@ public partial class MainWindow
         }
     }
 
+    private string[] baceInfo = new[]
+    {
+        "", "", "", ""
+    };
+
     private async void ShowInfoPhoto(string path)
     {
+        ClearBox();
         string p = "'" + path?.Replace(@"\", @"/") + "'";
         //foreach (var ph in await _client.QueryAsync<Photo>("Select (Select Photo {id}) filter .full_path = .full_path limit 1;"))
         //{
         //Author_box.Text = "select (Select Photo filter .full_path = " + p +" limit 1).author.full_name;";
         //Author_box.Text = "Select Photo filter .full_path = " + path +" limit 1;";
-        var authorFullName = "select (select Photo filter .full_path = {p} limit 1).author.full_name;";
-        var rating = "select (select Photo filter .full_path = {p} limit 1).rating;";
-        Author_box.Text = await _client.QuerySingleAsync<string>(authorFullName);
-        //Rate_box.Text = (await _client.QuerySingleAsync<Photo.Rating>(rating)).ToString();
-        
-        
+        var authorFullName = $"select (select Photo filter .full_path = {p} limit 1).author.full_name;";
+        var rating = $"select (select Photo filter .full_path = {p} limit 1).rating;";
+        var _event = $"select (select (select Photo filter .full_path = {p} limit 1).event).title;";
+        var face = $"select (select (select Photo filter .full_path = {p} limit 1).face).full_name;";
 
-        //}
+        
+        Author_box.Text = await _client.QuerySingleAsync<string>(authorFullName);
+        baceInfo[0] = Author_box.Text;
+        Rate_box.Text = (await _client.QuerySingleAsync<int>(rating)).ToString();
+        baceInfo[1] = Rate_box.Text;
+        Event_box.Text = (await _client.QuerySingleAsync<string>(_event));
+        baceInfo[2] = Event_box.Text;
+
+        foreach (var pers in await _client.QueryAsync<string>(face))
+        {
+            Face_box.Text += pers.ToString() + "; ";
+        }
+
+        baceInfo[3] = Face_box.Text;
     }
 
+
+    private void ClearBox()
+    {
+        Author_box.Text = "";
+        Rate_box.Text = "";
+        Event_box.Text = "";
+        Face_box.Text = "";
+    }
+
+    private void Cancel_click(object sender, RoutedEventArgs e)
+    {
+        Author_box.Text = baceInfo[0];
+        Rate_box.Text = baceInfo[1];
+        Event_box.Text = baceInfo[2];
+        Face_box.Text = baceInfo[3];
+    }
+    private void Ok_click(object sender, RoutedEventArgs e)
+    {
+        
+        MessageBox.Show("Sucses");
+    }
+    
     private static bool IsDir(string path)
     {
         return Directory.Exists(path);
     }
+
 }

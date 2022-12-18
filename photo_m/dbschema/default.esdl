@@ -11,7 +11,19 @@ module default {
 
     type Photographer extending Human{
         multi link camera -> Camera;
+        multi link favorite_camera := (
+            with p := Photographer
+            select
+                (group 
+                    (select
+                    Camera filter Camera.photographers = p)
+                by .name)
+            order by 
+                (select count(Camera.photographers)) desc
+            limit 1 
+        );
         property nick -> str {constraint exclusive; };
+        multi link photos := .<author[is Photo];
 
     }
 
@@ -19,9 +31,9 @@ module default {
         required property brand -> str;
         required property model -> str;
         required property name := .brand ++ ' ' ++ .model;
+        multi link photographers := .<camera[is Photographer];
     }
 
-    scalar type Rate extending enum<None, Bad, NotBad, Normal, Super, Shdevr>;
 
     type Photo {
         required property name -> str;
@@ -29,8 +41,8 @@ module default {
         required property full_path := .directory ++ .name;
         required link author -> Photographer;
         multi link face -> Person;
-        property rating -> Rate{
-            default:=Rate.None;
+        property rating -> int64{
+            default:=0;
         }
         link event -> Event;
     }
