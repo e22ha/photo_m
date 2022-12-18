@@ -145,10 +145,14 @@ public partial class MainWindow
         Event_box.Text = baceInfo[2];
         Face_box.Text = baceInfo[3];
     }
-    private void Ok_click(object sender, RoutedEventArgs e)
+    private async void Ok_click(object sender, RoutedEventArgs e)
     {
+        var bigQurey =
+            "with _n := '9876.jpg', _d := 'C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/test/1/12/', _r := 1, _A_n := 'Al', _A_s := 'Ni', _A_nick := 'NAl', _A := (insert Photographer { name := _A_n, surname := _A_s, nick := _A_nick, }unless conflict on .nick else (select Photographer)), _E_n := 'NY', _E_d :=  <datetime>'2022-08-22T22:22:00Z', _E := (insert Event { title := _E_n, date := _E_d }unless conflict on (.title, .date) else (select Event) ), _P_n := 'Pavel', _P_s := 'Solomatov', _P1_n := 'G', _P1_s := 'Leb', _P := (insert Person { name := _P_n, surname := _P_s }unless conflict on (.name, .surname) else (select Person) ), _P1 := (insert Person {name := _P1_n, surname := _P1_s }unless conflict on (.name, .surname) else (select Person) ), _Ps := {_P,_P1} Insert Photo {  name := _n, directory := _d, rating := _r, author := _A, event := _E, face := _Ps } unless conflict on (.directory, .name)else (update Photo filter .full_path = (select(_d ++ _n))set { rating := _r, author := _A, event := _E, face := _Ps } );";
         
-        MessageBox.Show("Sucses");
+        await _client.QueryAsync<Photo>(bigQurey);
+        
+        MessageBox.Show("Success");
     }
     
     private static bool IsDir(string path)

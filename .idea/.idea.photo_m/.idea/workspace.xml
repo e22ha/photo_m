@@ -4,13 +4,7 @@
     <projectFile>photo_m/photo_m.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/CPhoto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CPhoto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/MainWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/dbschema/default.esdl" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/dbschema/default.esdl" afterDir="false" />
-    </list>
+    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="fix deserialization &amp; add ok_click" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,12 +20,23 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/photo_m/CHuman.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/CPhoto.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/CPhoto.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/CPhoto.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/photo_m/CPhotographer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/photo_m/PhotographsView.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/photo_m/PhotographsView.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7bcc3c030b344d699e29d1f60de694a0f798a0/f3/ea374b8c/ContentControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a9407d3c68934fa68bea9ed3c05c78f240000/36/f3650333/EdgeDBClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/132d206fd2eef1bacab41edb9d7b94f6ef31adab23426e55df119be72bd76b/ConcurrentStack.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2a5cc194fee19ec98ae1c3a8395d4f42f3d0dc84adbe34dcc08c28eec6bc9b1/TaskAwaiter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/80bbeda04f1e9776c81db5e7a71ee537ff88e08969ee21735ced3b63c5ec462/Tuple.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/85448f861b1cb95910693f28a5ce3363967c79953b460b176d97298ae5ed0/Nullable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bc55ae671a88627605bb9f3e3d91e26d30e97784e7bbb87f3eee711195b5c3/Future.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ce58aa709e137f52f62067a677ead16bdbca15feb2b485e836bed62532f4c8/Interlocked.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fb1bce394c580639308684ba58c3f427e74b648cd6a8cf711fd7d46b44/Interlocked.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -115,7 +120,7 @@
       <workItem from="1670767740398" duration="6000000" />
       <workItem from="1671344046907" duration="663000" />
       <workItem from="1671348584874" duration="899000" />
-      <workItem from="1671353689050" duration="3957000" />
+      <workItem from="1671353689050" duration="13881000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1670657271068</created>
@@ -145,7 +150,28 @@
       <option name="project" value="LOCAL" />
       <updated>1670773623758</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="all info about photo show&#10;update shema">
+      <created>1671363953288</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671363953288</updated>
+    </task>
+    <task id="LOCAL-00006" summary="all info about photo show&#10;update shema">
+      <created>1671363979665</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671363979665</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix deserialization &amp; add ok_click">
+      <created>1671375661728</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671375661728</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,7 +203,16 @@
     <MESSAGE value="add ui" />
     <MESSAGE value="add photograph list" />
     <MESSAGE value="inprogress" />
-    <option name="LAST_COMMIT_MESSAGE" value="inprogress" />
+    <MESSAGE value="all info about photo show&#10;update shema" />
+    <MESSAGE value="fix deserialization &amp; add ok_click" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix deserialization &amp; add ok_click" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#System.Threading.Tasks.Task" memberName="Options" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

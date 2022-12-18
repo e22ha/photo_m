@@ -6,22 +6,11 @@ module default {
     }
 
     type Person extending Human {
-         
+        constraint exclusive on ( (.name, .surname) );
     }
 
     type Photographer extending Human{
         multi link camera -> Camera;
-        multi link favorite_camera := (
-            with p := Photographer
-            select
-                (group 
-                    (select
-                    Camera filter Camera.photographers = p)
-                by .name)
-            order by 
-                (select count(Camera.photographers)) desc
-            limit 1 
-        );
         property nick -> str {constraint exclusive; };
         multi link photos := .<author[is Photo];
 
@@ -38,7 +27,8 @@ module default {
     type Photo {
         required property name -> str;
         required property directory -> str;
-        required property full_path := .directory ++ .name;
+        required property full_path := c_f_path(.directory, .name);
+        constraint exclusive on ( (.name, .directory) );
         required link author -> Photographer;
         multi link face -> Person;
         property rating -> int64{
@@ -49,16 +39,15 @@ module default {
 
     type Event {
         required property title -> str;
-        property date -> datetime;
+        required property date -> datetime;
+        constraint exclusive on ( (.title, .date) );
     }
-
-    function count_p_by_author(author_id: uuid)-> int64
+    
+    function c_f_path(dir: str, n: str)-> str
         using(
-            SELECT count(
-            (
-            select Photo
-            filter .author.id = author_id
-            )
+            SELECT(
+                dir ++ n
             )
         )
+    
 }

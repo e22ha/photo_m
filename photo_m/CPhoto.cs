@@ -3,10 +3,10 @@ using photo_m;
 
 namespace photo_m
 {
-    public abstract class Photo
+    public class Photo
     {
         public Guid? id { get; set; }
-        public string full_path
+        public string? full_path
         {
             set
             {
@@ -18,21 +18,20 @@ namespace photo_m
             }
         }
 
-        public int? Rating;
-      
+        public long? Rating;
+        
+        public Event? event_;
 
-        public Event event_;
+        public Photographer? author;
 
-        public Photographer author;
-
-        public Human face;
+        public Person? face;
 
     }
 
     public class Event
     {
         public Guid? id { get; set; }
-
-        public string title;
+        public string? title;
+        public DateTimeOffset? date;
     }
 }
