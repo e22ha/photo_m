@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -96,12 +97,12 @@ public partial class MainWindow
         }
     }
 
-    private string[] baceInfo = new[]
+    private string?[] _baseInfo =
     {
         "", "", "", ""
     };
 
-    private async void ShowInfoPhoto(string path)
+    private async void ShowInfoPhoto(string? path)
     {
         ClearBox();
         var p = ClearPath(path);
@@ -111,29 +112,28 @@ public partial class MainWindow
         //Author_box.Text = "Select Photo filter .full_path = " + path +" limit 1;";
         var authorFullName = $"select (select Photo filter .full_path = '{p}' limit 1).author.nick;";
         var rating = $"select (select Photo filter .full_path = '{p}' limit 1).rating;";
-        var _event = $"select (select (select Photo filter .full_path = '{p}' limit 1).event).title;";
+        var titleEvent = $"select (select (select Photo filter .full_path = '{p}' limit 1).event).title;";
         var face = $"select (select (select Photo filter .full_path = '{p}' limit 1).face).full_name;";
 
-        
-        Author_box.Text = await _client.QuerySingleAsync<string>(authorFullName);
-        baceInfo[0] = Author_box.Text;
-        Rate_box.Text = (await _client.QuerySingleAsync<int>(rating)).ToString();
-        baceInfo[1] = Rate_box.Text;
-        Event_box.Text = (await _client.QuerySingleAsync<string>(_event));
-        baceInfo[2] = Event_box.Text;
 
-        foreach (var pers in await _client.QueryAsync<string>(face))
+        Author_box.Text = await _client.QuerySingleAsync<string>(authorFullName);
+        _baseInfo[0] = Author_box.Text;
+        Rate_box.Text = (await _client.QuerySingleAsync<int>(rating)).ToString();
+        _baseInfo[1] = Rate_box.Text;
+        Event_box.Text = (await _client.QuerySingleAsync<string>(titleEvent));
+        _baseInfo[2] = Event_box.Text;
+
+        foreach (var person in await _client.QueryAsync<string>(face))
         {
-            Face_box.Text += pers.ToString() + "; ";
+            Face_box.Text += person + "; ";
         }
 
-        baceInfo[3] = Face_box.Text;
+        _baseInfo[3] = Face_box.Text;
     }
 
-    private static string ClearPath(string path)
+    private static string? ClearPath(string? path)
     {
-        return (path?.Replace(@"\", @"/"));
-
+        return path?.Replace(@"\", @"/");
     }
 
 
@@ -147,68 +147,95 @@ public partial class MainWindow
 
     private void Cancel_click(object sender, RoutedEventArgs e)
     {
-        Author_box.Text = baceInfo[0];
-        Rate_box.Text = baceInfo[1];
-        Event_box.Text = baceInfo[2];
-        Face_box.Text = baceInfo[3];
+        Author_box.Text = _baseInfo[0];
+        Rate_box.Text = _baseInfo[1];
+        Event_box.Text = _baseInfo[2];
+        Face_box.Text = _baseInfo[3];
     }
+
+    struct Face
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+    }
+
+
     private async void Ok_click(object sender, RoutedEventArgs e)
     {
         var l = (ListBoxItem)list_of_files.Items[list_of_files.SelectedIndex];
         var path = PathTextBox.Text;
 
         var rating = 0;
-        var author_nick = Author_box.Text;
-        
-        var Author_name = "";
-        var Author_surname = "";
+        var authorNick = Author_box.Text;
 
-        if (await FindPhByNick(author_nick))
+        var authorName = "";
+        var authorSurname = "";
+
+        if (await FindPhByNick(authorNick))
         {
             var ph = await _client.QuerySingleAsync<Photographer?>(
-                $"select Photographer {{name, surname}} filter .nick = '{author_nick}' limit 1;");
-            Author_name = ph.name;
-            Author_surname = ph.surname;
-            MessageBox.Show(Author_surname.ToString());
+                $"select Photographer {{name, surname}} filter .nick = '{authorNick}' limit 1;");
+            authorName = ph.name;
+            authorSurname = ph.surname;
         }
         else
         {
-            addPerson aP = new addPerson(author_nick);
+            addPerson aP = new addPerson(authorNick);
             aP.ShowDialog();
             if (aP.DialogResult == true)
             {
-                // Окно было закрыто с помощью кнопки "ОК"
-                Author_name = aP.name; 
-                Author_surname = aP.surname;
+                authorName = aP.name;
+                authorSurname = aP.surname;
             }
         }
+
+
+        var eventText = Event_box.Text;
+        var nameF = l.Content.ToString()?.Replace("📁", "");
+
+        var faces = Face_box.Text.Split("; ");
+        List<Face> listFace = new List<Face>();
+        for (var index = 0; index < faces.Length-1; index++)
+        {
+            var f = faces[index].Split(" ");
+            listFace.Add(new Face { Name = f[0], Surname = f[1]});
+        }
+
         
+        var faceQuery = "";
+        var countFaceQuery = "_Ps := { ";
+
+        for (var i = 0; i < listFace.Count; i++)
+        {
+            faceQuery += $"_Pn_{i} := '{listFace[i].Name}', _Ps_{i} := '{listFace[i].Surname}', ";
+            faceQuery += $"_P{i} := (insert Person {{name:= _Pn_{i}, surname := _Ps_{i} }}unless conflict on (.name, .surname) else (select Person) ), ";
+            countFaceQuery += $"_P{i},";
+        }
+
+        countFaceQuery = countFaceQuery.Remove(countFaceQuery.LastIndexOf(",", StringComparison.Ordinal));
+        countFaceQuery += "} ";
         
-        var Event = Event_box.Text;
-        var namef = l.Content.ToString()?.Replace("📁", "");
-        
-        
-        var bigQurey =
-            $"with _n := '{namef}', _d := '{ClearPath(path)}', _r := {rating}, " + 
-            $"_A_n :='{Author_name}', _A_s := '{Author_surname}', _A_nick := '{author_nick}', " + "_A := (insert Photographer {name:= _A_n, surname := _A_s, nick := _A_nick, }unless conflict on .nick else (select Photographer))," + 
-            $" _E_n := '{Event}', _E_d :=  <datetime>'{DateTime.Now:yyyy-MM-ddTHH:mm:ssZ}', " + 
-            "_E := (insert Event {title:= _E_n, date := _E_d }unless conflict on (.title, .date) else (select Event) ), " + 
-            "_P_n := 'Pavel', _P_s := 'Solomatov', _P1_n := 'G', _P1_s := 'Leb', _P := (insert Person {name:= _P_n, surname := _P_s }unless conflict on (.name, .surname) else (select Person) ), _P1 := (insert Person {name:= _P1_n, surname := _P1_s }unless conflict on (.name, .surname) else (select Person) ), _Ps := {_P,_P1} Insert Photo {name:= _n, directory := _d, rating := _r, author := _A, event := _E, face := _Ps } unless conflict on (.directory, .name)else (update Photo filter .full_path = (select(_d ++ _n))set {rating:= _r, author := _A, event := _E, face := _Ps } );";
-        
-        var res = ShowQurey(bigQurey);
+        var bigQuery =
+            $"with _n := '{nameF}', _d := '{ClearPath(path)}', _r := {rating}, " +
+            $"_A_n :='{authorName}', _A_s := '{authorSurname}', _A_nick := '{authorNick}', " +
+            "_A := (insert Photographer {name:= _A_n, surname := _A_s, nick := _A_nick, }unless conflict on .nick else (select Photographer))," +
+            $" _E_n := '{eventText}', _E_d :=  <datetime>'{DateTime.Today:yyyy-MM-ddTHH:mm:ssZ}', " +
+            "_E := (insert Event {title:= _E_n, date := _E_d }unless conflict on (.title, .date) else (select Event) ), " +
+            faceQuery + countFaceQuery +
+            "Insert Photo {name:= _n, directory := _d, rating := _r, author := _A, event := _E, face := _Ps } unless conflict on (.directory, .name)else (update Photo filter .full_path = (select(_d ++ _n))set {rating:= _r, author := _A, event := _E, face := _Ps } );";
+
+        var res = ShowQuery(bigQuery);
         if (res)
         {
-            askDb(bigQurey);
-            MessageBox.Show("Yes");
+            await AskDb(bigQuery);
         }
-        
     }
 
-    private async Task<bool> FindPhByNick(string author_nick)
+    private async Task<bool> FindPhByNick(string authorNick)
     {
         foreach (var ph in await _client.QueryAsync<string>("select( select Photographer {nick}).nick;"))
         {
-            if (ph == author_nick)
+            if (ph == authorNick)
             {
                 return true;
             }
@@ -217,21 +244,20 @@ public partial class MainWindow
         return false;
     }
 
-    private async Task askDb(string bigQurey)
+    private async Task AskDb(string bigQuery)
     {
-        await _client.QueryAsync<Photo>(bigQurey);
+        await _client.QueryAsync<Photo>(bigQuery);
     }
 
 
-    private static bool IsDir(string path)
+    private static bool IsDir(string? path)
     {
         return Directory.Exists(path);
     }
 
-    private bool ShowQurey(string q)
+    private static bool ShowQuery(string q)
     {
         var res = MessageBox.Show(q, "caption", MessageBoxButton.YesNo);
         return res == MessageBoxResult.Yes;
     }
-
 }
