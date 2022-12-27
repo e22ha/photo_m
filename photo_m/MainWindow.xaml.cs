@@ -25,6 +25,8 @@ public partial class MainWindow
             ConnectionTimeout = 5000u
         };
         _client = new EdgeDBClient(config);
+        
+        ShowDir();
     }
 
     private void Back(object sender, RoutedEventArgs e)
@@ -35,19 +37,19 @@ public partial class MainWindow
 
     private void f_mode(object sender, RoutedEventArgs e)
     {
-        Photographs pWin = new Photographs();
+        PhotographsWin pWin = new PhotographsWin();
         pWin.Show();
     }
 
     private void e_mode(object sender, RoutedEventArgs e)
     {
-        Photographs pWin = new Photographs();
+        PhotographsWin pWin = new PhotographsWin();
         pWin.Show();
     }
 
     private void p_mode(object sender, RoutedEventArgs e)
     {
-        addPerson aP = new addPerson("lol");
+        addPerson aP = new addPerson("default");
         aP.Show();
     }
 
@@ -99,7 +101,7 @@ public partial class MainWindow
 
     private string?[] _baseInfo =
     {
-        "", "", "", ""
+        "", "", "", "", "", ""
     };
 
     private async void ShowInfoPhoto(string? path)
@@ -110,13 +112,14 @@ public partial class MainWindow
         //{
         //Author_box.Text = "select (Select Photo filter .full_path = " + p +" limit 1).author.full_name;";
         //Author_box.Text = "Select Photo filter .full_path = " + path +" limit 1;";
-        var authorFullName = $"select (select Photo filter .full_path = '{p}' limit 1).author.nick;";
+        var GetAuthorNick = $"select (select Photo filter .full_path = '{p}' limit 1).author.nick;";
+        var GetCameraName = $"select (select Photo filter .full_path = '{p}' limit 1).camera.name;";
         var rating = $"select (select Photo filter .full_path = '{p}' limit 1).rating;";
         var titleEvent = $"select (select (select Photo filter .full_path = '{p}' limit 1).event).title;";
         var face = $"select (select (select Photo filter .full_path = '{p}' limit 1).face).full_name;";
 
 
-        Author_box.Text = await _client.QuerySingleAsync<string>(authorFullName);
+        Author_box.Text = await _client.QuerySingleAsync<string>(GetAuthorNick);
         _baseInfo[0] = Author_box.Text;
         Rate_box.Text = (await _client.QuerySingleAsync<int>(rating)).ToString();
         _baseInfo[1] = Rate_box.Text;
@@ -140,17 +143,21 @@ public partial class MainWindow
     private void ClearBox()
     {
         Author_box.Text = "";
+        Camera_box.Text = "";
         Rate_box.Text = "";
         Event_box.Text = "";
+        Date_box.Text = "";
         Face_box.Text = "";
     }
 
     private void Cancel_click(object sender, RoutedEventArgs e)
     {
         Author_box.Text = _baseInfo[0];
-        Rate_box.Text = _baseInfo[1];
-        Event_box.Text = _baseInfo[2];
-        Face_box.Text = _baseInfo[3];
+        Camera_box.Text = _baseInfo[1];
+        Rate_box.Text = _baseInfo[2];
+        Event_box.Text = _baseInfo[3];
+        Date_box.Text = _baseInfo[4];
+        Face_box.Text = _baseInfo[5];
     }
 
     struct Face
@@ -165,7 +172,7 @@ public partial class MainWindow
         var l = (ListBoxItem)list_of_files.Items[list_of_files.SelectedIndex];
         var path = PathTextBox.Text;
 
-        var rating = 0;
+        var rating = Rate_box.Text;
         var authorNick = Author_box.Text;
 
         var authorName = "";
@@ -193,28 +200,35 @@ public partial class MainWindow
         var eventText = Event_box.Text;
         var nameF = l.Content.ToString()?.Replace("📁", "");
 
-        var faces = Face_box.Text.Split("; ");
-        List<Face> listFace = new List<Face>();
-        for (var index = 0; index < faces.Length-1; index++)
-        {
-            var f = faces[index].Split(" ");
-            listFace.Add(new Face { Name = f[0], Surname = f[1]});
-        }
-
-        
         var faceQuery = "";
         var countFaceQuery = "_Ps := { ";
 
-        for (var i = 0; i < listFace.Count; i++)
+        if (Face_box.Text != "")
         {
-            faceQuery += $"_Pn_{i} := '{listFace[i].Name}', _Ps_{i} := '{listFace[i].Surname}', ";
-            faceQuery += $"_P{i} := (insert Person {{name:= _Pn_{i}, surname := _Ps_{i} }}unless conflict on (.name, .surname) else (select Person) ), ";
-            countFaceQuery += $"_P{i},";
-        }
+            var faces = Face_box.Text.Split("; ");
+            List<Face> listFace = new List<Face>();
 
-        countFaceQuery = countFaceQuery.Remove(countFaceQuery.LastIndexOf(",", StringComparison.Ordinal));
+            for (var index = 0; index < faces.Length - 1; index++)
+            {
+                var f = faces[index].Split(" ");
+                listFace.Add(new Face { Name = f[0], Surname = f[1] });
+            }
+
+
+            faceQuery = "";
+
+            for (var i = 0; i < listFace.Count; i++)
+            {
+                faceQuery += $"_Pn_{i} := '{listFace[i].Name}', _Ps_{i} := '{listFace[i].Surname}', ";
+                faceQuery +=
+                    $"_P{i} := (insert Person {{name:= _Pn_{i}, surname := _Ps_{i} }}unless conflict on (.name, .surname) else (select Person) ), ";
+                countFaceQuery += $"_P{i},";
+            }
+
+            countFaceQuery = countFaceQuery.Remove(countFaceQuery.LastIndexOf(",", StringComparison.Ordinal));
+        } 
         countFaceQuery += "} ";
-        
+
         var bigQuery =
             $"with _n := '{nameF}', _d := '{ClearPath(path)}', _r := {rating}, " +
             $"_A_n :='{authorName}', _A_s := '{authorSurname}', _A_nick := '{authorNick}', " +

@@ -29,12 +29,13 @@ module default {
         required property directory -> str;
         required property full_path := c_f_path(.directory, .name);
         constraint exclusive on ( (.name, .directory) );
-        required link author -> Photographer;
+        link author -> Photographer;
         multi link face -> Person;
         property rating -> int64{
             default:=0;
         }
         link event -> Event;
+        link camera -> Camera;
     }
 
     type Event {

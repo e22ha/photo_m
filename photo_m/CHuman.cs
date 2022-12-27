@@ -8,5 +8,3 @@ public abstract class Human {
     public string? surname { get; set; } 
     public string? full_name { get; set; }
 }
-public class Person : Human{
-}

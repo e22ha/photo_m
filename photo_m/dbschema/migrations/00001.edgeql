@@ -1,6 +1,24 @@
-CREATE MIGRATION m17mw3bfip6dzrl7f4y7u24mkbprjefbl6gvvtz6arwqii7y4injta
+CREATE MIGRATION m1gxx6hpwt32sbbdrhgfzjshnaw2wkqu7vbe2yfvkki6buaetqqzyq
     ONTO initial
 {
+  CREATE FUNCTION default::c_f_path(dir: std::str, n: std::str) ->  std::str USING (SELECT
+      (dir ++ n)
+  );
+  CREATE TYPE default::Event {
+      CREATE REQUIRED PROPERTY date -> std::datetime;
+      CREATE REQUIRED PROPERTY title -> std::str;
+      CREATE CONSTRAINT std::exclusive ON ((.title, .date));
+  };
+  CREATE TYPE default::Photo {
+      CREATE REQUIRED PROPERTY directory -> std::str;
+      CREATE REQUIRED PROPERTY name -> std::str;
+      CREATE REQUIRED PROPERTY full_path := (default::c_f_path(.directory, .name));
+      CREATE LINK event -> default::Event;
+      CREATE CONSTRAINT std::exclusive ON ((.name, .directory));
+      CREATE PROPERTY rating -> std::int64 {
+          SET default := 0;
+      };
+  };
   CREATE FUTURE nonrecursive_access_policies;
   CREATE TYPE default::Camera {
       CREATE REQUIRED PROPERTY brand -> std::str;
@@ -14,24 +32,24 @@ CREATE MIGRATION m17mw3bfip6dzrl7f4y7u24mkbprjefbl6gvvtz6arwqii7y4injta
   };
   CREATE TYPE default::Photographer EXTENDING default::Human {
       CREATE MULTI LINK camera -> default::Camera;
-  };
-  CREATE TYPE default::Event {
-      CREATE PROPERTY date -> std::datetime;
-      CREATE REQUIRED PROPERTY title -> std::str;
-  };
-  CREATE SCALAR TYPE default::Rate EXTENDING enum<None, Bad, NotBad, Normal, Super, Shdevr>;
-  CREATE TYPE default::Photo {
-      CREATE LINK event -> default::Event;
-      CREATE REQUIRED LINK author -> default::Photographer;
-      CREATE REQUIRED PROPERTY directory -> std::str;
-      CREATE REQUIRED PROPERTY name -> std::str;
-      CREATE REQUIRED PROPERTY full_path := (((.directory ++ ' ') ++ .name));
-      CREATE PROPERTY rating -> default::Rate {
-          SET default := (default::Rate.None);
+      CREATE PROPERTY nick -> std::str {
+          CREATE CONSTRAINT std::exclusive;
       };
   };
-  CREATE TYPE default::Person EXTENDING default::Human;
+  ALTER TYPE default::Camera {
+      CREATE MULTI LINK photographers := (.<camera[IS default::Photographer]);
+  };
+  ALTER TYPE default::Photo {
+      CREATE LINK camera -> default::Camera;
+  };
+  CREATE TYPE default::Person EXTENDING default::Human {
+      CREATE CONSTRAINT std::exclusive ON ((.name, .surname));
+  };
   ALTER TYPE default::Photo {
       CREATE MULTI LINK face -> default::Person;
+      CREATE LINK author -> default::Photographer;
+  };
+  ALTER TYPE default::Photographer {
+      CREATE MULTI LINK photos := (.<author[IS default::Photo]);
   };
 };

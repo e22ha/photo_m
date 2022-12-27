@@ -4,10 +4,7 @@
     <projectFile>photo_m/photo_m.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" afterDir="false" />
-    </list>
+    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="refactor" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +29,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/132d206fd2eef1bacab41edb9d7b94f6ef31adab23426e55df119be72bd76b/ConcurrentStack.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29d413ab2fdd934034e94d91ac54dad4fd453660b2fe63750ffc2b4b22879/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2a5cc194fee19ec98ae1c3a8395d4f42f3d0dc84adbe34dcc08c28eec6bc9b1/TaskAwaiter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/42214ad7d7f2d35c5f288e11be7dfb2c96bdcd88a41d8917d6bfbd5de8e6f5/Uri.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6879c9ed20391a5ccfea363be5964fbcfe4f1dfde9558aa84b36df6b6ec92c6/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7bc786d716d3b44285c829414cff7ae250446a97b719cae686c85ab01e3c/ItemCollection.cs" root0="SKIP_HIGHLIGHTING" />
@@ -129,7 +127,14 @@
       <workItem from="1671537135974" duration="65000" />
       <workItem from="1671546991578" duration="13514000" />
       <workItem from="1671591755964" duration="1554000" />
-      <workItem from="1671596492750" duration="2797000" />
+      <workItem from="1671596492750" duration="4526000" />
+      <workItem from="1671606441627" duration="180000" />
+      <workItem from="1671759297850" duration="1510000" />
+      <workItem from="1671761816160" duration="1545000" />
+      <workItem from="1671870162050" duration="1998000" />
+      <workItem from="1672117627383" duration="1989000" />
+      <workItem from="1672121775217" duration="208000" />
+      <workItem from="1672125262260" duration="73000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1670657271068</created>
@@ -159,7 +164,35 @@
       <option name="project" value="LOCAL" />
       <updated>1670773623758</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="bigQuery done">
+      <created>1671599358720</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671599358720</updated>
+    </task>
+    <task id="LOCAL-00006" summary="refactor">
+      <created>1672117866473</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1672117866473</updated>
+    </task>
+    <task id="LOCAL-00007" summary="refactor">
+      <created>1672118250995</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1672118250995</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactor">
+      <created>1672125322118</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1672125322118</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,7 +224,9 @@
     <MESSAGE value="add ui" />
     <MESSAGE value="add photograph list" />
     <MESSAGE value="inprogress" />
-    <option name="LAST_COMMIT_MESSAGE" value="inprogress" />
+    <MESSAGE value="bigQuery done" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

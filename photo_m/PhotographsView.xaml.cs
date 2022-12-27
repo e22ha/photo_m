@@ -10,15 +10,14 @@ using EdgeDB;
 namespace photo_m;
 
 
-public partial class Photographs : Window
+public partial class PhotographsWin : Window
 {
     private String result;
     public EdgeDBClient _client = new();
-    public Photographs()
+    public PhotographsWin()
     {
         InitializeComponent();
         var i = 0;
-        //Query();
         NormalQuery();
 
     }
@@ -28,7 +27,7 @@ public partial class Photographs : Window
     async void NormalQuery()
     {
         foreach (var ph in await _client.QueryAsync<Tuple<string, long>>(
-                     "SELECT (Photographer.full_name, (select count(Photographer.<author[is Photo])));"))
+                     "SELECT (Photographer.full_name, Photographer.photos);"))
         {
             ListBoxItem itm = new()
             {

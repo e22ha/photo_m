@@ -44,7 +44,6 @@
                   Name="list_of_files"
                   SelectionChanged="List_of_files_OnSelectionChanged"
                   Background="Silver">
-            <ListBoxItem Name="first_item" Content="1"></ListBoxItem>
         </ListBox>
         <Label  Name="Log" Content="Log" />
         <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="3">
@@ -55,39 +54,51 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.4*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Grid.ColumnSpan="2" Name="ImageV" Source="/Resource/img_placeholder.png" Margin="15"></Image>
+            <Image Grid.ColumnSpan="2" Name="ImageV" Source="/Resource/folder_placeholder.png" Margin="15"></Image>
             <Label Grid.Row="1" Grid.Column="0"
                    Content="Фотограф"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <TextBox Name="Author_box" Grid.Row="1" Grid.Column="1" Text="Gold" Height="20"
+            <TextBox Name="Author_box" Grid.Row="1" Grid.Column="1" Text="" Height="20"
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
             <Label Grid.Row="2" Grid.Column="0"
-                   Content="Рейтинг"
+                   Content="Камера"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <TextBox Name="Rate_box" Grid.Row="2" Grid.Column="1" Text="Gold" Height="20"
+            <TextBox Name="Camera_box" Grid.Row="2" Grid.Column="1" Text="" Height="20"
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
             <Label Grid.Row="3" Grid.Column="0"
+                   Content="Рейтинг"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <TextBox Name="Rate_box" Grid.Row="3" Grid.Column="1" Text="" Height="20"
+                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <Label Grid.Row="4" Grid.Column="0"
                    Content="Событие"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <TextBox  Name="Event_box" Grid.Row="3" Grid.Column="1" Text="Gold" Height="20"
+            <TextBox  Name="Event_box" Grid.Row="4" Grid.Column="1" Text="" Height="20"
                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <Label Grid.Row="4" Grid.Column="0"
+            <Label Grid.Row="5" Grid.Column="0"
+                   Content="Дата"
+                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <TextBox Name="Date_box" Grid.Row="5" Grid.Column="1" Text="" Height="20"
+                     HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <Label Grid.Row="6" Grid.Column="0"
                    Content="Лица"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <TextBox Name="Face_box" Grid.Row="4" Grid.Column="1" Text="Gold" Height="20"
+            <TextBox Name="Face_box" Grid.Row="6" Grid.Column="1" Text="" Height="20"
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <Button Grid.Row="5" Grid.Column="0"
+            <Button Grid.Row="7" Grid.Column="0"
                     Content="Отмена"
                     Click="Cancel_click"
                     Height="20"
                     Width="50"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-            <Button Grid.Row="5" Grid.Column="1"
+            <Button Grid.Row="7" Grid.Column="1"
                     Content="Ок"
                     Click="Ok_click"
                     Height="20"
