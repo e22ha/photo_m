@@ -21,6 +21,7 @@ module default {
         required property brand -> str;
         required property model -> str;
         required property name := .brand ++ ' ' ++ .model;
+        constraint exclusive on ( (.brand, .model) );
         multi link photographers := .<camera[is Photographer];
     }
 

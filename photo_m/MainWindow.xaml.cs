@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,7 +27,7 @@ public partial class MainWindow
             ConnectionTimeout = 5000u
         };
         _client = new EdgeDBClient(config);
-        
+
         ShowDir();
     }
 
@@ -113,20 +114,26 @@ public partial class MainWindow
         //{
         //Author_box.Text = "select (Select Photo filter .full_path = " + p +" limit 1).author.full_name;";
         //Author_box.Text = "Select Photo filter .full_path = " + path +" limit 1;";
-        var GetInfoAboutPhoto = $@"select Photo {{ author: {{nick}}, camera: {{name}}, rating, event: {{title,date}}, face: {{full_name}} }} filter .full_path = '{p}';";
+        var GetInfoAboutPhoto =
+            $@"select Photo {{ author: {{nick}}, camera: {{name}}, rating, event: {{title,date}}, face: {{full_name}} }} filter .full_path = '{p}';";
 
         foreach (var photo in await _client.QueryAsync<Photo>(GetInfoAboutPhoto))
         {
             if (photo.author?.nick != null) Author_box.Text = photo.author.nick;
-            if (photo.camera?.name != null) Camera_box.Text = photo.camera.name;
+            if(photo.camera != null) Camera_box.Text = photo.camera.name;
             if (photo.rating != null) Rate_box.Text = photo.rating.ToString();
-            if (photo.event_?.title != null) Event_box.Text = photo.event_.title;
-            if (photo.event_?.date != null) Date_box.Text = photo.event_.date.ToString();
+            if(photo.@event != null)
+            {
+                Event_box.Text = photo.@event.title;
+                Date_box.Text = DateTime.Parse(photo.@event.date.ToString()).ToString("dd.MM.yyyy");
+            }
+            
             foreach (var f in photo.face)
             {
                 Face_box.Text += f.full_name + "; ";
             }
         }
+
         _baseInfo[0] = Author_box.Text;
         _baseInfo[1] = Camera_box.Text;
         _baseInfo[2] = Rate_box.Text;
@@ -135,7 +142,7 @@ public partial class MainWindow
         _baseInfo[5] = Face_box.Text;
     }
 
-    private static string?ClearPath(string? path)
+    private static string? ClearPath(string? path)
     {
         return path?.Replace(@"\", @"\\");
     }
@@ -197,9 +204,33 @@ public partial class MainWindow
             }
         }
 
+        var nameF = l.Content.ToString()?.Replace("📁", "");
+
+
+        var EventQurey = "";
+        var InsertEventQurey = "";
+
+
+        if(Event_box.Text == "") Event_box.Text = "Default Event";
+        if(Date_box.Text == "") Date_box.Text = "22.12.2022";
 
         var eventText = Event_box.Text;
-        var nameF = l.Content.ToString()?.Replace("📁", "");
+        var eventDateText = Date_box.Text;
+        const string format = "yyyy-MM-ddTHH:mm:ssZ";
+        var date = DateTime.ParseExact(eventDateText, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+        var ClearEventDateText = date.ToString(format);
+        EventQurey = $" _E_n := '{eventText}', _E_d :=  <datetime>'{ClearEventDateText}', ";
+        InsertEventQurey =
+            "_E := (insert Event {title:= _E_n, date := _E_d }unless conflict on (.title, .date) else (select Event) ), ";
+
+        var CameraQurey = "";
+        if (Camera_box.Text != "")
+        {
+            var c = Camera_box.Text.Split(" ");
+            CameraQurey =
+                $" _C := (insert Camera {{brand:= '{c[0]}', model := '{c[1]}', }}unless conflict on (.brand, .model) else (select Camera)),";
+        }
+        
 
         var faceQuery = "";
         var countFaceQuery = "_Ps := { ";
@@ -227,17 +258,18 @@ public partial class MainWindow
             }
 
             countFaceQuery = countFaceQuery.Remove(countFaceQuery.LastIndexOf(",", StringComparison.Ordinal));
-        } 
+        }
+
         countFaceQuery += "} ";
 
         var bigQuery =
             $"with _n := '{nameF}', _d := '{ClearPath(path)}', _r := {rating}, " +
-            $"_A_n :='{authorName}', _A_s := '{authorSurname}', _A_nick := '{authorNick}', " +
-            "_A := (insert Photographer {name:= _A_n, surname := _A_s, nick := _A_nick, }unless conflict on .nick else (select Photographer))," +
-            $" _E_n := '{eventText}', _E_d :=  <datetime>'{DateTime.Today:yyyy-MM-ddTHH:mm:ssZ}', " +
-            "_E := (insert Event {title:= _E_n, date := _E_d }unless conflict on (.title, .date) else (select Event) ), " +
+            CameraQurey +
+            $"_A := (insert Photographer {{name:= '{authorName}', surname := '{authorSurname}', nick := '{authorNick}', }}unless conflict on .nick else (select Photographer))," +
+            EventQurey +
+            InsertEventQurey +
             faceQuery + countFaceQuery +
-            "Insert Photo {name:= _n, directory := _d, rating := _r, author := _A, event := _E, face := _Ps } unless conflict on (.directory, .name)else (update Photo filter .full_path = (select(_d ++ _n))set {rating:= _r, author := _A, event := _E, face := _Ps } );";
+            "Insert Photo {name:= _n, directory := _d, rating := _r, author := _A, event := _E, camera := _C, face := _Ps } unless conflict on (.directory, .name)else (update Photo filter .full_path = (select(_d ++ _n))set {rating:= _r, author := _A, event := _E, camera := _C, face := _Ps } );";
 
         var res = ShowQuery(bigQuery);
         if (res)
@@ -245,7 +277,7 @@ public partial class MainWindow
             await AskDb(bigQuery);
         }
     }
-
+    
     private async Task<bool> FindPhByNick(string authorNick)
     {
         foreach (var ph in await _client.QueryAsync<string>("select( select Photographer {nick}).nick;"))

@@ -15,7 +15,7 @@ namespace photo_m
 
         public Person[]? face { get; set; }
         public long? rating { get; set; }
-        public Event? event_ { get; set; }
+        public Event? @event { get; set; }
         public Camera? camera { get; set; }
     }
 }
