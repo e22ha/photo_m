@@ -11,10 +11,11 @@ namespace photo_m
         public string? directory { get; set; }
         public string? full_path { get; set; }
         
-        public Photographer? author;
+        public Photographer? author { get; set; }
 
-        public Person? face;
-        public long? Rating { get; set; }
-        public Event? event_;
+        public Person[]? face { get; set; }
+        public long? rating { get; set; }
+        public Event? event_ { get; set; }
+        public Camera? camera { get; set; }
     }
 }

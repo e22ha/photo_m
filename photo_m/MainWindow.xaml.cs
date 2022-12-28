@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -112,34 +113,25 @@ public partial class MainWindow
         //{
         //Author_box.Text = "select (Select Photo filter .full_path = " + p +" limit 1).author.full_name;";
         //Author_box.Text = "Select Photo filter .full_path = " + path +" limit 1;";
-        var GetAuthorNick = $@"select (select Photo filter .full_path = '{p}' limit 1).author.nick;";
-        var GetCameraName = $"select (select Photo filter .full_path = '{p}' limit 1).camera.name;";
-        var rating = $"select (select Photo filter .full_path = '{p}' limit 1).rating;";
-        var GetEvent = $"select (select (select Photo filter .full_path = '{p}' limit 1).event) {{title, date}};";
-        var face = $"select (select (select Photo filter .full_path = '{p}').face) {{full_name}};";
+        var GetInfoAboutPhoto = $@"select Photo {{ author: {{nick}}, camera: {{name}}, rating, event: {{title,date}}, face: {{full_name}} }} filter .full_path = '{p}';";
 
-
-        Author_box.Text = await _client.QuerySingleAsync<string>(GetAuthorNick);
+        foreach (var photo in await _client.QueryAsync<Photo>(GetInfoAboutPhoto))
+        {
+            if (photo.author?.nick != null) Author_box.Text = photo.author.nick;
+            if (photo.camera?.name != null) Camera_box.Text = photo.camera.name;
+            if (photo.rating != null) Rate_box.Text = photo.rating.ToString();
+            if (photo.event_?.title != null) Event_box.Text = photo.event_.title;
+            if (photo.event_?.date != null) Date_box.Text = photo.event_.date.ToString();
+            foreach (var f in photo.face)
+            {
+                Face_box.Text += f.full_name + "; ";
+            }
+        }
         _baseInfo[0] = Author_box.Text;
-        Camera_box.Text = await _client.QuerySingleAsync<string>(GetCameraName);
         _baseInfo[1] = Camera_box.Text;
-        Rate_box.Text = (await _client.QuerySingleAsync<long>(rating)).ToString();
         _baseInfo[2] = Rate_box.Text;
-        var Event = await _client.QuerySingleAsync<Event>(GetEvent);
-        if (Event != null) 
-        {
-            Event_box.Text = Event.title;
-            _baseInfo[3] = Event_box.Text;
-            Date_box.Text = Event.date.ToString();
-            _baseInfo[4] = Date_box.Text;
-            
-        }
-
-        foreach (var person in await _client.QueryAsync<Person>(face))
-        {
-            Face_box.Text += person.full_name + "; ";
-        }
-
+        _baseInfo[3] = Event_box.Text;
+        _baseInfo[4] = Date_box.Text;
         _baseInfo[5] = Face_box.Text;
     }
 

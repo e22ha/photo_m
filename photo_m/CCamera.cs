@@ -9,5 +9,5 @@ public class Camera
     public string? model { get; set; }
     public string? name { get; set; }
 
-    public Photographer? photographers;
+    public Photographer? photographers { get; set; }
 }

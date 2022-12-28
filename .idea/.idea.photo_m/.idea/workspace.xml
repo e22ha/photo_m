@@ -4,12 +4,14 @@
     <projectFile>photo_m/photo_m.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="update getInfo">
-      <change afterPath="$PROJECT_DIR$/photo_m/PersonView.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/photo_m/PersonView.xaml.cs" afterDir="false" />
+    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="create person info window">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/CCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CCamera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/CEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/CPerson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CPerson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/CPhoto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CPhoto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/CPhotographer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CPhotographer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/PhotographsView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/PhotographsView.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,15 +27,18 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/photo_m/CHuman.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/CPerson.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/photo_m/CPhotographer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/MainWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/photo_m/PhotographsView.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/photo_m/PhotographsView.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/3084d11350b2488ca852a8736f33547cb1c880/3b/45adbc8d/02000496pdb648.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7bcc3c030b344d699e29d1f60de694a0f798a0/f3/ea374b8c/ContentControl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a9407d3c68934fa68bea9ed3c05c78f240000/36/f3650333/EdgeDBClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/132d206fd2eef1bacab41edb9d7b94f6ef31adab23426e55df119be72bd76b/ConcurrentStack.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/235260b0832797469c99769925fbbed036f6cc4f35257ebe263a24d25e64bb5d/TextBox.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29d413ab2fdd934034e94d91ac54dad4fd453660b2fe63750ffc2b4b22879/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2a5cc194fee19ec98ae1c3a8395d4f42f3d0dc84adbe34dcc08c28eec6bc9b1/TaskAwaiter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/42214ad7d7f2d35c5f288e11be7dfb2c96bdcd88a41d8917d6bfbd5de8e6f5/Uri.cs" root0="SKIP_HIGHLIGHTING" />
@@ -42,6 +47,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6dbb569dbe3b9c99c13aa357d6b921d85492fb9c5bb6eb4cf61df636e99f94/PriorityRange.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7bc786d716d3b44285c829414cff7ae250446a97b719cae686c85ab01e3c/ItemCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/80bbeda04f1e9776c81db5e7a71ee537ff88e08969ee21735ced3b63c5ec462/Tuple.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/816dbaba8a29ece3dd3dc326642858d27d2d19142f9a2109bb04617985ec9/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/85448f861b1cb95910693f28a5ce3363967c79953b460b176d97298ae5ed0/Nullable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ac32f819d6853e0a6eda168c52b7f38eef9ae75936fb85d96a15c39d115245/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d1c7906533aea419fa4023145539c219e40eacbde752ddcc6e58d14df8925/TimeSpan.cs" root0="SKIP_HIGHLIGHTING" />
@@ -152,7 +158,7 @@
       <workItem from="1672213761818" duration="2118000" />
       <workItem from="1672220269981" duration="1302000" />
       <workItem from="1672221894884" duration="448000" />
-      <workItem from="1672222640059" duration="1960000" />
+      <workItem from="1672222640059" duration="6553000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1670657271068</created>
@@ -231,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672224276782</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="create person info window">
+      <created>1672224883422</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1672224883422</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,7 +279,8 @@
     <MESSAGE value="bigQuery done" />
     <MESSAGE value="refactor" />
     <MESSAGE value="update getInfo" />
-    <option name="LAST_COMMIT_MESSAGE" value="update getInfo" />
+    <MESSAGE value="create person info window" />
+    <option name="LAST_COMMIT_MESSAGE" value="create person info window" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
@@ -274,6 +288,11 @@
         <PinnedItemInfo parentTag="Type#System.Threading.Tasks.Task" memberName="Options" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="DotNetProject">
+        <watch expression="((EdgeDB.EdgeDBErrorException) $exception).Query" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
