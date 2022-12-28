@@ -112,31 +112,40 @@ public partial class MainWindow
         //{
         //Author_box.Text = "select (Select Photo filter .full_path = " + p +" limit 1).author.full_name;";
         //Author_box.Text = "Select Photo filter .full_path = " + path +" limit 1;";
-        var GetAuthorNick = $"select (select Photo filter .full_path = '{p}' limit 1).author.nick;";
+        var GetAuthorNick = $@"select (select Photo filter .full_path = '{p}' limit 1).author.nick;";
         var GetCameraName = $"select (select Photo filter .full_path = '{p}' limit 1).camera.name;";
         var rating = $"select (select Photo filter .full_path = '{p}' limit 1).rating;";
-        var titleEvent = $"select (select (select Photo filter .full_path = '{p}' limit 1).event).title;";
-        var face = $"select (select (select Photo filter .full_path = '{p}' limit 1).face).full_name;";
+        var GetEvent = $"select (select (select Photo filter .full_path = '{p}' limit 1).event) {{title, date}};";
+        var face = $"select (select (select Photo filter .full_path = '{p}').face) {{full_name}};";
 
 
         Author_box.Text = await _client.QuerySingleAsync<string>(GetAuthorNick);
         _baseInfo[0] = Author_box.Text;
-        Rate_box.Text = (await _client.QuerySingleAsync<int>(rating)).ToString();
-        _baseInfo[1] = Rate_box.Text;
-        Event_box.Text = (await _client.QuerySingleAsync<string>(titleEvent));
-        _baseInfo[2] = Event_box.Text;
-
-        foreach (var person in await _client.QueryAsync<string>(face))
+        Camera_box.Text = await _client.QuerySingleAsync<string>(GetCameraName);
+        _baseInfo[1] = Camera_box.Text;
+        Rate_box.Text = (await _client.QuerySingleAsync<long>(rating)).ToString();
+        _baseInfo[2] = Rate_box.Text;
+        var Event = await _client.QuerySingleAsync<Event>(GetEvent);
+        if (Event != null) 
         {
-            Face_box.Text += person + "; ";
+            Event_box.Text = Event.title;
+            _baseInfo[3] = Event_box.Text;
+            Date_box.Text = Event.date.ToString();
+            _baseInfo[4] = Date_box.Text;
+            
         }
 
-        _baseInfo[3] = Face_box.Text;
+        foreach (var person in await _client.QueryAsync<Person>(face))
+        {
+            Face_box.Text += person.full_name + "; ";
+        }
+
+        _baseInfo[5] = Face_box.Text;
     }
 
-    private static string? ClearPath(string? path)
+    private static string?ClearPath(string? path)
     {
-        return path?.Replace(@"\", @"/");
+        return path?.Replace(@"\", @"\\");
     }
 
 

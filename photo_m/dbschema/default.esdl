@@ -7,6 +7,7 @@ module default {
 
     type Person extending Human {
         constraint exclusive on ( (.name, .surname) );
+        multi link photos := .<face[is Photo];
     }
 
     type Photographer extending Human{

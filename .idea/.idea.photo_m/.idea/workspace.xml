@@ -4,7 +4,12 @@
     <projectFile>photo_m/photo_m.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="refactor" />
+    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="update getInfo">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/CPerson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CPerson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/PhotographsView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/PhotographsView.xaml.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,12 +37,19 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/42214ad7d7f2d35c5f288e11be7dfb2c96bdcd88a41d8917d6bfbd5de8e6f5/Uri.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6879c9ed20391a5ccfea363be5964fbcfe4f1dfde9558aa84b36df6b6ec92c6/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6dbb569dbe3b9c99c13aa357d6b921d85492fb9c5bb6eb4cf61df636e99f94/PriorityRange.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7bc786d716d3b44285c829414cff7ae250446a97b719cae686c85ab01e3c/ItemCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/80bbeda04f1e9776c81db5e7a71ee537ff88e08969ee21735ced3b63c5ec462/Tuple.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/85448f861b1cb95910693f28a5ce3363967c79953b460b176d97298ae5ed0/Nullable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ac32f819d6853e0a6eda168c52b7f38eef9ae75936fb85d96a15c39d115245/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d1c7906533aea419fa4023145539c219e40eacbde752ddcc6e58d14df8925/TimeSpan.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b26c3ab2885ae1e2397c50e3e6819ad88ed89adf3f8ee61523986ef3a4fbcf/Application.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bc55ae671a88627605bb9f3e3d91e26d30e97784e7bbb87f3eee711195b5c3/Future.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c3b2a4cdcf127e28515dc4657830cb28309c97b930e7b89a3f664eda6c5172/Thread.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ce58aa709e137f52f62067a677ead16bdbca15feb2b485e836bed62532f4c8/Interlocked.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d05f70559122dfb21712dbedbe71a96d317ca8fd3867172ec7112d1e89f7adb/HwndSubclass.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fac0d219dacf1ae7a75f907ae54bbdd67674f647e3bb82fe597028363a1bfa/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fb1bce394c580639308684ba58c3f427e74b648cd6a8cf711fd7d46b44/Interlocked.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -134,7 +146,11 @@
       <workItem from="1671870162050" duration="1998000" />
       <workItem from="1672117627383" duration="1989000" />
       <workItem from="1672121775217" duration="208000" />
-      <workItem from="1672125262260" duration="73000" />
+      <workItem from="1672125262260" duration="96000" />
+      <workItem from="1672213761818" duration="2118000" />
+      <workItem from="1672220269981" duration="1302000" />
+      <workItem from="1672221894884" duration="448000" />
+      <workItem from="1672222640059" duration="1577000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1670657271068</created>
@@ -192,7 +208,21 @@
       <option name="project" value="LOCAL" />
       <updated>1672125322118</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="refactor">
+      <created>1672125349639</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1672125349639</updated>
+    </task>
+    <task id="LOCAL-00010" summary="update getInfo">
+      <created>1672222127628</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1672222127628</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,9 +256,27 @@
     <MESSAGE value="inprogress" />
     <MESSAGE value="bigQuery done" />
     <MESSAGE value="refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
+    <MESSAGE value="update getInfo" />
+    <option name="LAST_COMMIT_MESSAGE" value="update getInfo" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/photo_m/MainWindow.xaml.cs</url>
+          <line>139</line>
+          <properties documentPath="C:\Code\_catalog_py_sqlite\rgz_2.0\photo_m\photo_m\MainWindow.xaml.cs" initialLine="139" containingFunctionPresentation="method 'ShowInfoPhoto'">
+            <startOffsets>
+              <option value="4493" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4534" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Type#System.Threading.Tasks.Task" memberName="Options" />
