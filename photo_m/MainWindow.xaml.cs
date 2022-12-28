@@ -43,14 +43,14 @@ public partial class MainWindow
 
     private void e_mode(object sender, RoutedEventArgs e)
     {
-        PhotographsWin pWin = new PhotographsWin();
-        pWin.Show();
+        addPerson aP = new addPerson("default");
+        aP.Show();
     }
 
     private void p_mode(object sender, RoutedEventArgs e)
     {
-        addPerson aP = new addPerson("default");
-        aP.Show();
+        PersonView pWin = new PersonView();
+        pWin.Show();
     }
 
     private void Find(object sender, RoutedEventArgs e)

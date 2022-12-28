@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.JavaScript;
-using System.Threading.Tasks;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using EdgeDB;
 
-
 namespace photo_m;
 
-
-public partial class PhotographsWin : Window
+public partial class PersonView : Window
 {
+    
     private String result;
     public EdgeDBClient _client = new();
-    public PhotographsWin()
+    public PersonView()
     {
         InitializeComponent();
         NormalQuery();
@@ -25,15 +21,16 @@ public partial class PhotographsWin : Window
     async void NormalQuery()
     {
         foreach (var ph in await _client.QueryAsync<Tuple<string, long>>(
-                     "SELECT (Photographer.full_name, count(Photographer.photos));"))
+                     "SELECT (Person.full_name, count(Person.photos));"))
         {
             ListBoxItem itm = new()
             {
                 Content = ph.Item1 + "------------" + ph.Item2
             };
-            ListOfPhotographs.Items.Add(itm);
+            ListOfPerson.Items.Add(itm);
         }
 
     }
+
 }
 
