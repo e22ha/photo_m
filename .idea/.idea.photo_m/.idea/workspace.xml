@@ -4,12 +4,13 @@
     <projectFile>photo_m/photo_m.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="optimize getInfo">
-      <change afterPath="$PROJECT_DIR$/photo_m/dbschema/migrations/00003.edgeql" afterDir="false" />
+    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/CPhoto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/CPhoto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/dbschema/default.esdl" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/dbschema/default.esdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/PersonView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/ObjectListView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/PersonView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/ObjectListView.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/PhotographsView.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/PhotographsView.xaml.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,14 +26,8 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/CCamera.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/photo_m/CHuman.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/CPerson.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/photo_m/CPhotographer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/MainWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/photo_m/PhotographsView.xaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/photo_m/PhotographsView.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/3084d11350b2488ca852a8736f33547cb1c880/3b/45adbc8d/02000496pdb648.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7bcc3c030b344d699e29d1f60de694a0f798a0/f3/ea374b8c/ContentControl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a9407d3c68934fa68bea9ed3c05c78f240000/36/f3650333/EdgeDBClient.cs" root0="SKIP_HIGHLIGHTING" />
@@ -74,26 +69,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.environmentSetup&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "ReSpellerSettingsId",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\HP\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\HP\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\HP\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\HP\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\HP\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\HP\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="photo_m" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/photo_m/bin/Debug/net7.0-windows/photo_m.exe" />
@@ -157,7 +152,9 @@
       <workItem from="1672213761818" duration="2118000" />
       <workItem from="1672220269981" duration="1302000" />
       <workItem from="1672221894884" duration="448000" />
-      <workItem from="1672222640059" duration="11686000" />
+      <workItem from="1672222640059" duration="11883000" />
+      <workItem from="1672637392374" duration="271000" />
+      <workItem from="1672638320939" duration="4986000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1670657271068</created>
@@ -250,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672229350943</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="fix upsert">
+      <created>1672234594042</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1672234594042</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +291,8 @@
     <MESSAGE value="update getInfo" />
     <MESSAGE value="create person info window" />
     <MESSAGE value="optimize getInfo" />
-    <option name="LAST_COMMIT_MESSAGE" value="optimize getInfo" />
+    <MESSAGE value="fix upsert" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix upsert" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

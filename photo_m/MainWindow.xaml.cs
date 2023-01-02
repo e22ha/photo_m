@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,19 +40,19 @@ public partial class MainWindow
 
     private void f_mode(object sender, RoutedEventArgs e)
     {
-        PhotographsWin pWin = new PhotographsWin();
+        var pWin = new ObjectListView("ph");
         pWin.Show();
     }
 
     private void e_mode(object sender, RoutedEventArgs e)
     {
-        addPerson aP = new addPerson("default");
-        aP.Show();
+        var pWin = new ObjectListView("e");
+        pWin.Show();
     }
 
     private void p_mode(object sender, RoutedEventArgs e)
     {
-        PersonView pWin = new PersonView();
+        var pWin = new ObjectListView("p");
         pWin.Show();
     }
 
@@ -83,25 +84,23 @@ public partial class MainWindow
 
     private void List_of_files_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (list_of_files.SelectedIndex > -1)
+        if (list_of_files.SelectedIndex <= -1) return;
+        var l = (ListBoxItem)list_of_files.Items[list_of_files.SelectedIndex];
+        var path = PathTextBox.Text + l.Content.ToString()?.Replace("📁", "");
+        Log.Content = path;
+        if (IsDir(path))
         {
-            ListBoxItem l = (ListBoxItem)list_of_files.Items[list_of_files.SelectedIndex];
-            var path = PathTextBox.Text + l.Content.ToString()?.Replace("📁", "");
-            Log.Content = path;
-            if (IsDir(path))
-            {
-                PathTextBox.Text = path;
-                ShowDir();
-            }
-            else
-            {
-                ImageV.Source = new BitmapImage(new Uri(path));
-                ShowInfoPhoto(path);
-            }
+            PathTextBox.Text = path;
+            ShowDir();
+        }
+        else
+        {
+            ImageV.Source = new BitmapImage(new Uri(path));
+            ShowInfoPhoto(path);
         }
     }
 
-    private string?[] _baseInfo =
+    private readonly string?[] _baseInfo =
     {
         "", "", "", "", "", ""
     };
@@ -168,10 +167,10 @@ public partial class MainWindow
         Face_box.Text = _baseInfo[5];
     }
 
-    struct Face
+    private struct Face
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string Name { get; init; }
+        public string Surname { get; init; }
     }
 
 
@@ -181,7 +180,10 @@ public partial class MainWindow
         var path = PathTextBox.Text;
 
         var rating = Rate_box.Text;
+        if (rating == "") rating = "0";
+        
         var authorNick = Author_box.Text;
+        if (authorNick == "") authorNick = "default";
 
         var authorName = "";
         var authorSurname = "";
@@ -195,7 +197,7 @@ public partial class MainWindow
         }
         else
         {
-            addPerson aP = new addPerson(authorNick);
+            var aP = new addPerson(authorNick);
             aP.ShowDialog();
             if (aP.DialogResult == true)
             {
@@ -230,10 +232,15 @@ public partial class MainWindow
             CameraQurey =
                 $" _C := (insert Camera {{brand:= '{c[0]}', model := '{c[1]}', }}unless conflict on (.brand, .model) else (select Camera)),";
         }
+        else
+        {
+            CameraQurey =
+                $" _C := (insert Camera {{brand:= '{"default"}', model := '{"camera"}', }}unless conflict on (.brand, .model) else (select Camera)),";
+        }
         
 
         var faceQuery = "";
-        var countFaceQuery = "_Ps := { ";
+        var countFaceQuery = "{ ";
 
         if (Face_box.Text != "")
         {
@@ -268,8 +275,8 @@ public partial class MainWindow
             $"_A := (insert Photographer {{name:= '{authorName}', surname := '{authorSurname}', nick := '{authorNick}', }}unless conflict on .nick else (select Photographer))," +
             EventQurey +
             InsertEventQurey +
-            faceQuery + countFaceQuery +
-            "Insert Photo {name:= _n, directory := _d, rating := _r, author := _A, event := _E, camera := _C, face := _Ps } unless conflict on (.directory, .name)else (update Photo filter .full_path = (select(_d ++ _n))set {rating:= _r, author := _A, event := _E, camera := _C, face := _Ps } );";
+            faceQuery +
+            $"Insert Photo {{name:= _n, directory := _d, rating := _r, author := _A, event := _E, camera := _C, face := {countFaceQuery} }} unless conflict on (.directory, .name)else (update Photo filter .full_path = (select(_d ++ _n))set {{rating:= _r, author := _A, event := _E, camera := _C, face := {countFaceQuery} }} );";
 
         var res = ShowQuery(bigQuery);
         if (res)
@@ -280,15 +287,7 @@ public partial class MainWindow
     
     private async Task<bool> FindPhByNick(string authorNick)
     {
-        foreach (var ph in await _client.QueryAsync<string>("select( select Photographer {nick}).nick;"))
-        {
-            if (ph == authorNick)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return (await _client.QueryAsync<string>("select( select Photographer {nick}).nick;")).Any(ph => ph == authorNick);
     }
 
     private async Task AskDb(string bigQuery)
