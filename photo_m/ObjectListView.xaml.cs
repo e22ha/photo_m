@@ -17,15 +17,15 @@ public partial class ObjectListView
         switch (type)
         {
             case "p":
-                Label.Content = "Люди";
+                Label.Content = "People";
                 Query(PersonQuery);
                 break;
             case "ph":
-                Label.Content = "Фотографы";
+                Label.Content = "Photographers";
                 Query(PhQuery);
                 break;
             case "e":
-                Label.Content = "События";
+                Label.Content = "Events";
                 Query(EventQuery);
                 break;
         }

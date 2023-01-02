@@ -4,13 +4,11 @@
     <projectFile>photo_m/photo_m.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="">
+    <list default="true" id="c370a7bf-802b-4437-b845-643b992b28c0" name="Changes" comment="add general list of object&#10;fix big query - add default value">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.photo_m/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/MainWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/PersonView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/ObjectListView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/PersonView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/ObjectListView.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/PhotographsView.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/photo_m/PhotographsView.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_m/ObjectListView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/photo_m/ObjectListView.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,11 +24,16 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/CHuman.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/CHuman.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/CHuman.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/photo_m/CHuman.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/photo_m/CPhotographer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Code/_catalog_py_sqlite/rgz_2.0/photo_m/photo_m/MainWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/3084d11350b2488ca852a8736f33547cb1c880/3b/45adbc8d/02000496pdb648.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7bcc3c030b344d699e29d1f60de694a0f798a0/f3/ea374b8c/ContentControl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a9407d3c68934fa68bea9ed3c05c78f240000/36/f3650333/EdgeDBClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a9407d3c68934fa68bea9ed3c05c78f240000/a3/6b0f28e2/ClientPacketDuplexer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a9407d3c68934fa68bea9ed3c05c78f240000/ee/7bdb452b/EdgeDBBinaryClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/132d206fd2eef1bacab41edb9d7b94f6ef31adab23426e55df119be72bd76b/ConcurrentStack.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/235260b0832797469c99769925fbbed036f6cc4f35257ebe263a24d25e64bb5d/TextBox.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29d413ab2fdd934034e94d91ac54dad4fd453660b2fe63750ffc2b4b22879/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
@@ -39,18 +42,24 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6879c9ed20391a5ccfea363be5964fbcfe4f1dfde9558aa84b36df6b6ec92c6/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6dbb569dbe3b9c99c13aa357d6b921d85492fb9c5bb6eb4cf61df636e99f94/PriorityRange.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6f25de705e93995d055318ddc36439e9e54d88ab443a979c412be1d04e39/ContentControl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7bc786d716d3b44285c829414cff7ae250446a97b719cae686c85ab01e3c/ItemCollection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7c1ab578e66a1b766b609c418417d9320b7743bbc9065d1639c5b570c87d3/DependencyObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7f22a9b6601c35418bf2cb1e9b774df6f0c1baf8b97b3e9fd4a69e6a078d392/PortableThreadPool.GateThread.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/80bbeda04f1e9776c81db5e7a71ee537ff88e08969ee21735ced3b63c5ec462/Tuple.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/816dbaba8a29ece3dd3dc326642858d27d2d19142f9a2109bb04617985ec9/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/85448f861b1cb95910693f28a5ce3363967c79953b460b176d97298ae5ed0/Nullable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ac32f819d6853e0a6eda168c52b7f38eef9ae75936fb85d96a15c39d115245/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9d1c7906533aea419fa4023145539c219e40eacbde752ddcc6e58d14df8925/TimeSpan.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b12ad9547e42ca3978b2148023a81a888a7874c1b210dc6def9fc0e7739e19/AsyncVoidMethodBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b26c3ab2885ae1e2397c50e3e6819ad88ed89adf3f8ee61523986ef3a4fbcf/Application.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bb50098d41456a553849b711fb8cc94a572a65be11a1ac8d3130c8512938ec/SynchronizationContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bc55ae671a88627605bb9f3e3d91e26d30e97784e7bbb87f3eee711195b5c3/Future.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c3b2a4cdcf127e28515dc4657830cb28309c97b930e7b89a3f664eda6c5172/Thread.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ce58aa709e137f52f62067a677ead16bdbca15feb2b485e836bed62532f4c8/Interlocked.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d05f70559122dfb21712dbedbe71a96d317ca8fd3867172ec7112d1e89f7adb/HwndSubclass.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7bdef8686489167e6bcc2498e93448cc314a7e6c78ad16fbe54b83ca84622/EventRoute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fac0d219dacf1ae7a75f907ae54bbdd67674f647e3bb82fe597028363a1bfa/Monitor.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fb1bce394c580639308684ba58c3f427e74b648cd6a8cf711fd7d46b44/Interlocked.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -89,6 +98,9 @@
     ]
   }
 }]]></component>
+  <component name="RiderProblemsViewState">
+    <option name="showPreview" value="true" />
+  </component>
   <component name="RunManager">
     <configuration name="photo_m" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/photo_m/bin/Debug/net7.0-windows/photo_m.exe" />
@@ -154,7 +166,7 @@
       <workItem from="1672221894884" duration="448000" />
       <workItem from="1672222640059" duration="11883000" />
       <workItem from="1672637392374" duration="271000" />
-      <workItem from="1672638320939" duration="4986000" />
+      <workItem from="1672638320939" duration="14091000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1670657271068</created>
@@ -254,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672234594042</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add general list of object&#10;fix big query - add default value">
+      <created>1672645164963</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1672645164963</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,7 +311,8 @@
     <MESSAGE value="create person info window" />
     <MESSAGE value="optimize getInfo" />
     <MESSAGE value="fix upsert" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix upsert" />
+    <MESSAGE value="add general list of object&#10;fix big query - add default value" />
+    <option name="LAST_COMMIT_MESSAGE" value="add general list of object&#10;fix big query - add default value" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

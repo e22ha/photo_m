@@ -22,15 +22,17 @@ public partial class MainWindow
     public MainWindow()
     {
         InitializeComponent();
-        Log.Content = "e";
         EdgeDBClientPoolConfig config = new()
         {
             ConnectionTimeout = 5000u
         };
         _client = new EdgeDBClient(config);
-
+        
+        
         ShowDir();
     }
+    
+    
 
     private void Back(object sender, RoutedEventArgs e)
     {
@@ -61,33 +63,39 @@ public partial class MainWindow
         ShowDir();
     }
 
-    private void ShowDir()
+    private async void ShowDir()
     {
         if (!PathTextBox.Text.EndsWith(@"\")) PathTextBox.Text += @"\";
-        list_of_files.SelectedIndex = -1;
-        list_of_files.Items.Clear();
+        ListOfFiles.SelectedIndex = -1;
+        ListOfFiles.Items.Clear();
         var directoryInfo = new DirectoryInfo(PathTextBox.Text);
 
         foreach (var file in directoryInfo.GetDirectories())
         {
-            list_of_files.Items.Add(new ListBoxItem { Content = "📁" + file.Name });
+            ListOfFiles.Items.Add(new ListBoxItem { Content = "📁" + file.Name });
         }
 
         foreach (var file in directoryInfo.GetFiles())
         {
             if (Path.GetExtension(file.FullName) == ".jpg" || Path.GetExtension(file.FullName) == ".png")
             {
-                list_of_files.Items.Add(new ListBoxItem { Content = file.Name });
+                ListOfFiles.Items.Add(new ListBoxItem { Content = file.Name });
             }
         }
+        
+        await AskCountPhoto();
     }
 
     private void List_of_files_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (list_of_files.SelectedIndex <= -1) return;
-        var l = (ListBoxItem)list_of_files.Items[list_of_files.SelectedIndex];
+        if (ListOfFiles.SelectedIndex <= -1) return;
+        ActionForDirOrImg();
+    }
+
+    private async void ActionForDirOrImg()
+    {
+        var l = (ListBoxItem)ListOfFiles.Items[ListOfFiles.SelectedIndex];
         var path = PathTextBox.Text + l.Content.ToString()?.Replace("📁", "");
-        Log.Content = path;
         if (IsDir(path))
         {
             PathTextBox.Text = path;
@@ -96,7 +104,7 @@ public partial class MainWindow
         else
         {
             ImageV.Source = new BitmapImage(new Uri(path));
-            ShowInfoPhoto(path);
+            await ShowInfoPhoto(path);
         }
     }
 
@@ -105,7 +113,7 @@ public partial class MainWindow
         "", "", "", "", "", ""
     };
 
-    private async void ShowInfoPhoto(string? path)
+    private async Task ShowInfoPhoto(string? path)
     {
         ClearBox();
         var p = ClearPath(path);
@@ -113,32 +121,34 @@ public partial class MainWindow
         //{
         //Author_box.Text = "select (Select Photo filter .full_path = " + p +" limit 1).author.full_name;";
         //Author_box.Text = "Select Photo filter .full_path = " + path +" limit 1;";
-        var GetInfoAboutPhoto =
+        var getInfoAboutPhoto =
             $@"select Photo {{ author: {{nick}}, camera: {{name}}, rating, event: {{title,date}}, face: {{full_name}} }} filter .full_path = '{p}';";
 
-        foreach (var photo in await _client.QueryAsync<Photo>(GetInfoAboutPhoto))
+        foreach (var photo in await _client.QueryAsync<Photo>(getInfoAboutPhoto))
         {
-            if (photo.author?.nick != null) Author_box.Text = photo.author.nick;
-            if(photo.camera != null) Camera_box.Text = photo.camera.name;
-            if (photo.rating != null) Rate_box.Text = photo.rating.ToString();
+            if (photo == null) continue;
+            if (photo.author?.nick != null) AuthorBox.Text = photo.author.nick;
+            if(photo.camera != null) CameraBox.Text = photo.camera.name;
+            if (photo.rating != null) RateBox.Text = photo.rating.ToString();
             if(photo.@event != null)
             {
-                Event_box.Text = photo.@event.title;
-                Date_box.Text = DateTime.Parse(photo.@event.date.ToString()).ToString("dd.MM.yyyy");
+                EventBox.Text = photo.@event.title;
+                DateBox.Text = DateTime.Parse(photo.@event.date.ToString() ?? string.Empty).ToString("dd.MM.yyyy");
             }
-            
-            foreach (var f in photo.face)
-            {
-                Face_box.Text += f.full_name + "; ";
-            }
+
+            if (photo.face != null)
+                foreach (var f in photo.face)
+                {
+                    FaceBox.Text += f.full_name + "; ";
+                }
         }
 
-        _baseInfo[0] = Author_box.Text;
-        _baseInfo[1] = Camera_box.Text;
-        _baseInfo[2] = Rate_box.Text;
-        _baseInfo[3] = Event_box.Text;
-        _baseInfo[4] = Date_box.Text;
-        _baseInfo[5] = Face_box.Text;
+        _baseInfo[0] = AuthorBox.Text;
+        _baseInfo[1] = CameraBox.Text;
+        _baseInfo[2] = RateBox.Text;
+        _baseInfo[3] = EventBox.Text;
+        _baseInfo[4] = DateBox.Text;
+        _baseInfo[5] = FaceBox.Text;
     }
 
     private static string? ClearPath(string? path)
@@ -149,22 +159,22 @@ public partial class MainWindow
 
     private void ClearBox()
     {
-        Author_box.Text = "";
-        Camera_box.Text = "";
-        Rate_box.Text = "";
-        Event_box.Text = "";
-        Date_box.Text = "";
-        Face_box.Text = "";
+        AuthorBox.Text = "";
+        CameraBox.Text = "";
+        RateBox.Text = "";
+        EventBox.Text = "";
+        DateBox.Text = "";
+        FaceBox.Text = "";
     }
 
     private void Cancel_click(object sender, RoutedEventArgs e)
     {
-        Author_box.Text = _baseInfo[0];
-        Camera_box.Text = _baseInfo[1];
-        Rate_box.Text = _baseInfo[2];
-        Event_box.Text = _baseInfo[3];
-        Date_box.Text = _baseInfo[4];
-        Face_box.Text = _baseInfo[5];
+        AuthorBox.Text = _baseInfo[0];
+        CameraBox.Text = _baseInfo[1];
+        RateBox.Text = _baseInfo[2];
+        EventBox.Text = _baseInfo[3];
+        DateBox.Text = _baseInfo[4];
+        FaceBox.Text = _baseInfo[5];
     }
 
     private struct Face
@@ -176,13 +186,19 @@ public partial class MainWindow
 
     private async void Ok_click(object sender, RoutedEventArgs e)
     {
-        var l = (ListBoxItem)list_of_files.Items[list_of_files.SelectedIndex];
+        var l = (ListBoxItem)ListOfFiles.Items[ListOfFiles.SelectedIndex];
+        await AddInfo(l);
+        await AskCountPhoto();
+    }
+
+    private async Task AddInfo(ListBoxItem l)
+    {
         var path = PathTextBox.Text;
 
-        var rating = Rate_box.Text;
+        var rating = RateBox.Text;
         if (rating == "") rating = "0";
-        
-        var authorNick = Author_box.Text;
+
+        var authorNick = AuthorBox.Text;
         if (authorNick == "") authorNick = "default";
 
         var authorName = "";
@@ -192,8 +208,8 @@ public partial class MainWindow
         {
             var ph = await _client.QuerySingleAsync<Photographer?>(
                 $"select Photographer {{name, surname}} filter .nick = '{authorNick}' limit 1;");
-            authorName = ph.name;
-            authorSurname = ph.surname;
+            authorName = ph?.name;
+            authorSurname = ph?.surname;
         }
         else
         {
@@ -209,42 +225,48 @@ public partial class MainWindow
         var nameF = l.Content.ToString()?.Replace("📁", "");
 
 
-        var EventQurey = "";
-        var InsertEventQurey = "";
+        if (EventBox.Text == "") EventBox.Text = "Default Event";
+        if (DateBox.Text == "") DateBox.Text = "22.12.2022";
 
-
-        if(Event_box.Text == "") Event_box.Text = "Default Event";
-        if(Date_box.Text == "") Date_box.Text = "22.12.2022";
-
-        var eventText = Event_box.Text;
-        var eventDateText = Date_box.Text;
+        var eventText = EventBox.Text;
+        var eventDateText = DateBox.Text;
         const string format = "yyyy-MM-ddTHH:mm:ssZ";
         var date = DateTime.ParseExact(eventDateText, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-        var ClearEventDateText = date.ToString(format);
-        EventQurey = $" _E_n := '{eventText}', _E_d :=  <datetime>'{ClearEventDateText}', ";
-        InsertEventQurey =
+        var clearEventDateText = date.ToString(format);
+        var eventQuery = $" _E_n := '{eventText}', _E_d :=  <datetime>'{clearEventDateText}', ";
+        var insertEventQuery =
             "_E := (insert Event {title:= _E_n, date := _E_d }unless conflict on (.title, .date) else (select Event) ), ";
 
-        var CameraQurey = "";
-        if (Camera_box.Text != "")
+        string cameraQuery;
+        if (CameraBox.Text != "")
         {
-            var c = Camera_box.Text.Split(" ");
-            CameraQurey =
+            var c = CameraBox.Text.Split(" ");
+            cameraQuery =
                 $" _C := (insert Camera {{brand:= '{c[0]}', model := '{c[1]}', }}unless conflict on (.brand, .model) else (select Camera)),";
         }
         else
         {
-            CameraQurey =
-                $" _C := (insert Camera {{brand:= '{"default"}', model := '{"camera"}', }}unless conflict on (.brand, .model) else (select Camera)),";
+            cameraQuery =
+                " _C := (insert Camera {brand:= 'default', model := 'camera', }unless conflict on (.brand, .model) else (select Camera)),";
         }
-        
+
 
         var faceQuery = "";
         var countFaceQuery = "{ ";
 
-        if (Face_box.Text != "")
+        if (FaceBox.Text != "")
         {
-            var faces = Face_box.Text.Split("; ");
+            if (FaceBox.Text.EndsWith(";"))
+            {
+                FaceBox.Text += " ";
+            }
+
+            if (!FaceBox.Text.EndsWith("; "))
+            {
+                FaceBox.Text += "; ";
+            }
+
+            var faces = FaceBox.Text.Split("; ");
             List<Face> listFace = new List<Face>();
 
             for (var index = 0; index < faces.Length - 1; index++)
@@ -271,20 +293,22 @@ public partial class MainWindow
 
         var bigQuery =
             $"with _n := '{nameF}', _d := '{ClearPath(path)}', _r := {rating}, " +
-            CameraQurey +
+            cameraQuery +
             $"_A := (insert Photographer {{name:= '{authorName}', surname := '{authorSurname}', nick := '{authorNick}', }}unless conflict on .nick else (select Photographer))," +
-            EventQurey +
-            InsertEventQurey +
+            eventQuery +
+            insertEventQuery +
             faceQuery +
             $"Insert Photo {{name:= _n, directory := _d, rating := _r, author := _A, event := _E, camera := _C, face := {countFaceQuery} }} unless conflict on (.directory, .name)else (update Photo filter .full_path = (select(_d ++ _n))set {{rating:= _r, author := _A, event := _E, camera := _C, face := {countFaceQuery} }} );";
 
-        var res = ShowQuery(bigQuery);
-        if (res)
-        {
-            await AskDb(bigQuery);
-        }
+        // var res = ShowQuery(bigQuery);
+        // if (res)
+        // {
+        await AskDb(bigQuery);
+        // }
+        await ShowInfoPhoto(PathTextBox.Text + l.Content.ToString()?.Replace("📁", ""));
+        await AskCountPhoto();
     }
-    
+
     private async Task<bool> FindPhByNick(string authorNick)
     {
         return (await _client.QueryAsync<string>("select( select Photographer {nick}).nick;")).Any(ph => ph == authorNick);
@@ -293,6 +317,29 @@ public partial class MainWindow
     private async Task AskDb(string bigQuery)
     {
         await _client.QueryAsync<Photo>(bigQuery);
+    }
+
+    private async Task AskCountPhoto()
+    {
+        LAllIndexImg.Content = await _client.QuerySingleAsync<string>("select count(Photo);");
+        LCountIndexImg.Content = await _client.QuerySingleAsync<string>($"select count(Photo filter .directory = '{ClearPath(PathTextBox.Text)}');");
+        LCountImg.Content = CountImgInDir();
+    }
+
+    private string CountImgInDir()
+    {
+        int count =0;
+        if (!PathTextBox.Text.EndsWith(@"\")) PathTextBox.Text += @"\";
+        var directoryInfo = new DirectoryInfo(PathTextBox.Text);
+        foreach (var file in directoryInfo.GetFiles())
+        {
+            if (Path.GetExtension(file.FullName) == ".jpg" || Path.GetExtension(file.FullName) == ".png")
+            {
+                count++;
+            }
+        }
+        
+        return count.ToString();
     }
 
 
@@ -305,5 +352,23 @@ public partial class MainWindow
     {
         var res = MessageBox.Show(q, "caption", MessageBoxButton.YesNo);
         return res == MessageBoxResult.Yes;
+    }
+
+    private async void IndexAllInDir(object sender, RoutedEventArgs e)
+    {
+        foreach (var t in ListOfFiles.Items)
+        {
+            var l = (ListBoxItem)t;
+            if (l.Content.ToString().StartsWith("📁"))
+            {
+                Debug.Write("folder");
+            }
+            else if(l.Content.ToString().EndsWith(".png") || l.Content.ToString().EndsWith(".jpg"))
+            {
+                await AddInfo(l);
+            }
+        }
+
+        await AskCountPhoto();
     }
 }

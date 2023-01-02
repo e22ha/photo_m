@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:photo_m"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -11,6 +10,7 @@
             <RowDefinition Height="0.5*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height=".75*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -20,9 +20,9 @@
         </Grid.ColumnDefinitions>
         <Menu Grid.ColumnSpan="4" HorizontalContentAlignment="Center" HorizontalAlignment="Center"
               VerticalContentAlignment="Center" VerticalAlignment="Center">
-            <MenuItem Click="f_mode" Header="Фотографы" HorizontalContentAlignment="Center" Width="70" Margin="50 0" />
-            <MenuItem Click="e_mode" Header="События" HorizontalContentAlignment="Center" Width="70" Margin="50 0" />
-            <MenuItem Click="p_mode" Header="Люди" HorizontalContentAlignment="Center" Width="70" Margin="50 0" />
+            <MenuItem Click="f_mode" Header="Photographers" HorizontalContentAlignment="Center" Width="70" Margin="50 0" />
+            <MenuItem Click="e_mode" Header="Events" HorizontalContentAlignment="Center" Width="70" Margin="50 0" />
+            <MenuItem Click="p_mode" Header="People" HorizontalContentAlignment="Center" Width="70" Margin="50 0" />
         </Menu>
         <Button Grid.Row="1" Grid.Column="0"
                 Content="⇱" Click="Back"
@@ -40,12 +40,29 @@
                 Content="Go" Click="Find"
                 Margin="5"
                 FontFamily="Roboto" />
-        <ListBox Grid.Row="2" Grid.ColumnSpan="3"
-                  Name="list_of_files"
+        <ListBox Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="0"
+                 Name="ListOfFiles"
                   SelectionChanged="List_of_files_OnSelectionChanged"
                   Background="Silver">
         </ListBox>
-        <Label  Name="Log" Content="Log" />
+        <Grid Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="0" >
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Content="Img:" VerticalAlignment="Center"/>
+            <Label Grid.Column="1" Name="LCountImg" Content="0" VerticalAlignment="Center"/>
+            <Label Grid.Column="2" Content="In current dir:" VerticalAlignment="Center"/>
+            <Label Grid.Column="3" Name="LCountIndexImg" Content="0" VerticalAlignment="Center" />
+            <Label Grid.Column="4" Content="All index:" VerticalAlignment="Center"/>
+            <Label Grid.Column="5" Name="LAllIndexImg" Content="0" VerticalAlignment="Center"/>
+            <Button Grid.Column="6" Click="IndexAllInDir" Width="Auto" Padding="5" Content="IndexAll" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </Grid>
         <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"></RowDefinition>
@@ -63,43 +80,43 @@
             </Grid.ColumnDefinitions>
             <Image Grid.ColumnSpan="2" Name="ImageV" Source="/Resource/folder_placeholder.png" Margin="15"></Image>
             <Label Grid.Row="1" Grid.Column="0"
-                   Content="Фотограф"
+                   Content="ph"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <TextBox Name="Author_box" Grid.Row="1" Grid.Column="1" Text="" Height="20"
+            <TextBox Name="AuthorBox" Grid.Row="1" Grid.Column="1" Text="" Height="20"
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
             <Label Grid.Row="2" Grid.Column="0"
-                   Content="Камера"
+                   Content="camera"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <TextBox Name="Camera_box" Grid.Row="2" Grid.Column="1" Text="" Height="20"
+            <TextBox Name="CameraBox" Grid.Row="2" Grid.Column="1" Text="" Height="20"
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
             <Label Grid.Row="3" Grid.Column="0"
-                   Content="Рейтинг"
+                   Content="Rate"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <TextBox Name="Rate_box" Grid.Row="3" Grid.Column="1" Text="" Height="20"
+            <TextBox Name="RateBox" Grid.Row="3" Grid.Column="1" Text="" Height="20"
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
             <Label Grid.Row="4" Grid.Column="0"
-                   Content="Событие"
+                   Content="Event"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <TextBox  Name="Event_box" Grid.Row="4" Grid.Column="1" Text="" Height="20"
+            <TextBox  Name="EventBox" Grid.Row="4" Grid.Column="1" Text="" Height="20"
                       HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
             <Label Grid.Row="5" Grid.Column="0"
-                   Content="Дата"
+                   Content="Date"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <TextBox Name="Date_box" Grid.Row="5" Grid.Column="1" Text="" Height="20"
+            <TextBox Name="DateBox" Grid.Row="5" Grid.Column="1" Text="" Height="20"
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
             <Label Grid.Row="6" Grid.Column="0"
-                   Content="Лица"
+                   Content="Face"
                    HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-            <TextBox Name="Face_box" Grid.Row="6" Grid.Column="1" Text="" Height="20"
+            <TextBox Name="FaceBox" Grid.Row="6" Grid.Column="1" Text="" Height="20"
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
             <Button Grid.Row="7" Grid.Column="0"
-                    Content="Отмена"
+                    Content="Cancel"
                     Click="Cancel_click"
                     Height="20"
                     Width="50"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Button Grid.Row="7" Grid.Column="1"
-                    Content="Ок"
+                    Content="Ok"
                     Click="Ok_click"
                     Height="20"
                     Width="50"
